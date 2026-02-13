@@ -25,6 +25,7 @@ import FaqPage from "../app/faq";
 import TermsPage from "../app/terms";
 import PrivacyPage from "../app/privacy";
 import AccountNumberPage from "../app/accountNumber";
+import CustomersManagement from "../app/customers/index.jsx";
 const AUTH_ROUTES = [
   {
     id: 1,
@@ -70,7 +71,7 @@ const ADMIN_ROUTES = [
   {
     id: 2,
     name: "客戶管理",
-    component: <UsersManagement />,
+    component: <CustomersManagement />,
     exact: "exact",
     path: "/users",
     activeIcon: <Users size={20} color="#ffffff" />,
