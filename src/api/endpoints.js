@@ -27,6 +27,9 @@ const ENDPOINTS = {
   updateLoanStatus: "user/request-loan/status",
   requestLoanInstallment: "user/request-loan/installment",
 
+  // Customer
+  getCustomers: "customers",
+
   // FAQ
   faq: "admin/faq",
 
