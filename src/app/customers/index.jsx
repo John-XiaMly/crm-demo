@@ -1,13 +1,12 @@
-import {Typography, Paper } from "@mui/material";
-import {Card, GridItem, Heading, Grid, Box, Text, Input, Button, HStack, Flex, SimpleGrid, Stack } from '@chakra-ui/react';
+import { Typography, Paper } from "@mui/material";
+import { Card, Heading, Box, Text, Input, Button, HStack, Flex, SimpleGrid, Stack } from '@chakra-ui/react';
 import DynamicTable from "../../components/dynamicTable";
 // import EditCustomerDialog from "./editCustomerDialog";
-import {useState, useEffect} from "react";
-import {getCustomers} from "@/api/Modules/customer.js";
-import {useSnackbar} from "notistack";
-import {useNavigate} from "react-router-dom";
-import EditCustomerDialog from "./editCustomerDialog.jsx";
-import {Plus, Filter, Trash2, Users} from "lucide-react"
+import { useState, useEffect} from "react";
+import { getCustomers } from "@/api/Modules/customer.js";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
+import { Plus, Filter, Trash2, Users } from "lucide-react"
 
 export const CustomersManagement = () => {
     // State for edit dialog
@@ -269,15 +268,15 @@ export const CustomersManagement = () => {
 
 
             {/* Edit Customer Dialog */}
-            <EditCustomerDialog
-                open={editDialogOpen}
-                onClose={() => {
-                    setEditDialogOpen(false);
-                    setSelectedCustomer(null);
-                }}
-                customer={selectedCustomer}
-                onRefresh={fetchAllCustomers}
-            />
+            {/*<EditCustomerDialog*/}
+            {/*    open={editDialogOpen}*/}
+            {/*    onClose={() => {*/}
+            {/*        setEditDialogOpen(false);*/}
+            {/*        setSelectedCustomer(null);*/}
+            {/*    }}*/}
+            {/*    customer={selectedCustomer}*/}
+            {/*    onRefresh={fetchAllCustomers}*/}
+            {/*/>*/}
         </Box>
     );
 };
