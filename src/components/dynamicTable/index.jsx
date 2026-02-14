@@ -444,7 +444,7 @@ export default function PaginatedTable({
                 </IconButton>
               )}
 
-              {/* {showDelete && onDelete && (
+              {showDelete && onDelete && (
                 <IconButton
                   size="small"
                   onClick={() => onDelete(row)}
@@ -464,7 +464,7 @@ export default function PaginatedTable({
                 >
                   <Trash2 size={18} />
                 </IconButton>
-              )} */}
+              )}
             </Box>
           </TableCell>
         );
