@@ -167,12 +167,12 @@ export const CustomersManagement = () => {
                                     <Text>條件式搜索</Text>
                                 </Heading>
                             </HStack>
-                            {/* <HStack wrap="wrap">
+                            <HStack wrap="wrap">
                                 <Button size="sm" colorPalette="red" variant="surface" onClick={handleClear}>
                                     <Trash2></Trash2>
                                     清除
                                 </Button>
-                            </HStack> */}
+                            </HStack>
                         </Flex>
                     </Card.Header>
                     <Card.Body>
@@ -238,12 +238,12 @@ export const CustomersManagement = () => {
                                 <Users></Users>
                                 <Text>客戶列表</Text>
                             </Heading>
-                            {/* <HStack wrap="wrap">
+                            <HStack wrap="wrap">
                                 <Button size="sm" colorPalette="green" variant="surface">
                                     <Plus></Plus>
                                     新增
                                 </Button>
-                            </HStack> */}
+                            </HStack>
                         </Flex>
                     </Card.Header>
                     <Card.Body>
