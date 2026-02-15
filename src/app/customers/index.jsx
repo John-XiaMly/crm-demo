@@ -50,7 +50,7 @@ export const CustomersManagement = () => {
         try {
             const response = await getCustomers();
             if (response.status === 200 || response.status === 201) {
-                console.log("response.data.data", response.data);
+                console.log("response.data", response.data);
                 // Transform API data to match table structure
                 const transformedData = response.data.map(customer => ({
                     ...customer,
