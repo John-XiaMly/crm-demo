@@ -1,16 +1,7 @@
 import api from "../index";
 import ENDPOINTS from "../endpoints";
-import { mockCustomers } from "../../mocks/customers";
 
-// export const getUsers = () => api(ENDPOINTS.getUsers, {}, "get");
-export const getUsers = async () => {
-  return {
-    status: 200,
-    data: {
-      data: mockCustomers,
-    },
-  };
-};
+export const getUsers = () => api(ENDPOINTS.getUsers, {}, "get");
 
 export const getUsersByUserId = (id) =>
   api(`${ENDPOINTS.getUsers}/${id}`, null, "get");
