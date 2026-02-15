@@ -1,11 +1,11 @@
-import { Box, Typography, Paper } from "@mui/material";
+import { Typography, Paper } from "@mui/material";
+import { Card, Heading, Box, Text, Input, Button, HStack, Flex, SimpleGrid, Stack } from '@chakra-ui/react';
 import DynamicTable from "../../components/dynamicTable";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllCaseRequests, updateCaseStatus } from "../../api/Modules/user";
 import { useSnackbar } from "notistack";
-
-
+import { Plus, Filter, Trash2, FileText } from "lucide-react"
 
 // Table headers for case management
 const tableHeaders = [
@@ -113,26 +113,117 @@ const CaseManagement = () => {
         </Typography>
       </Box>
 
-      {/* Case Table */}
-      <Paper elevation={1} sx={{ borderRadius: "8px" }}>
-        <DynamicTable
-          tableWidth={"100%"}
-          tableHeader={tableHeaders}
-          tableData={caseData}
-          displayRows={displayRows}
-          isLoading={isLoading}
-          showPagination={true}
-          handleCaseStatusChange={handleCaseStatusChange}
-          statusLoading={statusLoading}
-          onView={handleView}
+      <Box p={2}>
+        <Card.Root size="sm">
+          <Card.Header>
+            <Flex justify="space-between" align="center" wrap="wrap" gap="4">
+              <HStack wrap="wrap">
+                <Heading size="md" display="flex" alignItems="center" gap="2" color="blue">
+                  <Filter></Filter>
+                  <Text>條件式搜索</Text>
+                </Heading>
+              </HStack>
+              <HStack wrap="wrap">
+                <Button size="sm" colorPalette="red" variant="surface"/* onClick={handleClear}*/>
+                  <Trash2></Trash2>
+                  清除
+                </Button>
+              </HStack>
+            </Flex>
+          </Card.Header>
+          <Card.Body>
+            <Box p="4"> {/* 給內部一點內縮空間 */}
+              <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 4, lg: 10 }}>
+                <Stack direction={{ base: "column", md: "row" }} align={{ md: "center" }} gap={2}>
+                  <Text fontWeight="semibold" minW={{ md: "100px" }} whiteSpace="nowrap">
+                    建立日期
+                  </Text>
+                  <Input placeholder="請輸入建立日期" flex="1" variant="outline" /*value={name} onChange={(e) => handleChange(e, "name")}*/ />
+                </Stack>
+                <Stack direction={{ base: "column", md: "row" }} align={{ md: "center" }} gap={2}>
+                  <Text fontWeight="semibold" minW={{ md: "100px" }} whiteSpace="nowrap">
+                    客戶
+                  </Text>
+                  <Input placeholder="請輸入客戶名稱" flex="1" variant="outline" /*value={name} onChange={(e) => handleChange(e, "name")}*/ />
+                </Stack>
+              </SimpleGrid>
+            </Box>
+            <Box p="4"> {/* 給內部一點內縮空間 */}
+              <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 4, lg: 10 }}>
+                <Stack direction={{ base: "column", md: "row" }} align={{ md: "center" }} gap={2}>
+                  <Text fontWeight="semibold" minW={{ md: "100px" }} whiteSpace="nowrap">
+                    案件金額
+                  </Text>
+                  <Input placeholder="請輸入案件金額" flex="1" variant="outline" /*value={taxId}  onChange={(e) => handleChange(e, "taxId")}*/ />
+                </Stack>
+                <Stack direction={{ base: "column", md: "row" }} align={{ md: "center" }} gap={2}>
+                  <Text fontWeight="semibold" minW={{ md: "100px" }} whiteSpace="nowrap">
+                    方案/產品
+                  </Text>
+                  <Input placeholder="請輸入方案/產品" flex="1" variant="outline" /*value={owner}  onChange={(e) => handleChange(e, "owner")}*/ />
+                </Stack>
+              </SimpleGrid>
+            </Box>
+            <Box p="4">
+              <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 4, lg: 10 }}>
+                <Stack direction={{ base: "column", md: "row" }} align={{ md: "center" }} gap={2}>
+                  <Text fontWeight="semibold" minW={{ md: "100px" }} whiteSpace="nowrap">
+                    狀態
+                  </Text>
+                  <Input placeholder="請輸入聯絡人" flex="1" variant="outline" /*value={contactPerson}  onChange={(e) => handleChange(e, "contactPerson")}*/ />
+                </Stack>
+                <Stack direction={{ base: "column", md: "row" }} align={{ md: "center" }} gap={2}>
+                  <Text fontWeight="semibold" minW={{ md: "100px" }} whiteSpace="nowrap">
+                    操作
+                  </Text>
+                  <Input placeholder="請輸入地址" flex="1" variant="outline" /*value={address}  onChange={(e) => handleChange(e, "address")}*/ />
+                </Stack>
+              </SimpleGrid>
+            </Box>
+          </Card.Body>
+        </Card.Root>
+      </Box>
 
-          // onEdit={handleEdit}
-          // onDelete={handleDelete}
-          // onViewClick={handleView}
-          // showDelete={true}
-          // onStatusChange={handleStatusChange}
-        />
-      </Paper>
+      {/* Case Table */}
+      <Box p={2}>
+        <Card.Root>
+          <Card.Header>
+            <Flex justify="space-between" align="center" wrap="wrap" gap="4">
+              <Heading size="md" display="flex" alignItems="center" gap="2" color="blue">
+                <FileText />
+                <Text>案件列表</Text>
+              </Heading>
+              <HStack wrap="wrap">
+                <Button size="sm" colorPalette="green" variant="surface">
+                  <Plus></Plus>
+                  新增
+                </Button>
+              </HStack>
+            </Flex>
+          </Card.Header>
+          <Card.Body>
+            <Paper elevation={1} sx={{ borderRadius: "8px" }}>
+              <DynamicTable
+                tableWidth={"100%"}
+                tableHeader={tableHeaders}
+                tableData={caseData}
+                displayRows={displayRows}
+                isLoading={isLoading}
+                showPagination={true}
+                handleCaseStatusChange={handleCaseStatusChange}
+                statusLoading={statusLoading}
+                onView={handleView}
+
+                // onEdit={handleEdit}
+                // onDelete={handleDelete}
+                // onViewClick={handleView}
+                // showDelete={true}
+                // onStatusChange={handleStatusChange}
+              />
+            </Paper>
+          </Card.Body>
+        </Card.Root>
+      </Box>
     </Box>
   );
 };
