@@ -48,9 +48,10 @@ const CaseManagement = () => {
       if ([200, 201].includes(response?.status)) {
         const rows = (response.data.data.caseRequests || []).map((r) => ({
           ...r,
-          productInfo: `${r.interestRate ?? "-"}% / ${r.totalMonths ?? "-"}期`,
-          lastUpdated: r.updatedAt || r.createdAt || "-",
         }));
+        console.log("first row keys:", Object.keys(rows?.[0] || {}));
+        console.log("first row userInfo:", rows?.[0]?.userInfo);
+        console.log("first row user:", rows?.[0]?.user);
         setCaseData(rows);
       } else {
         enqueueSnackbar(response?.data?.message || "案件資料取得失敗", {
@@ -171,12 +172,6 @@ const CaseManagement = () => {
                     狀態
                   </Text>
                   <Input placeholder="請輸入聯絡人" flex="1" variant="outline" /*value={contactPerson}  onChange={(e) => handleChange(e, "contactPerson")}*/ />
-                </Stack>
-                <Stack direction={{ base: "column", md: "row" }} align={{ md: "center" }} gap={2}>
-                  <Text fontWeight="semibold" minW={{ md: "100px" }} whiteSpace="nowrap">
-                    操作
-                  </Text>
-                  <Input placeholder="請輸入地址" flex="1" variant="outline" /*value={address}  onChange={(e) => handleChange(e, "address")}*/ />
                 </Stack>
               </SimpleGrid>
             </Box>

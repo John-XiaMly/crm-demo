@@ -130,12 +130,12 @@ export default function PaginatedTable({
                 sx={{
                   width: 45,
                   height: 45,
-                  bgcolor: getAvatarColor(row.user?.name || row.name || ""),
+                  bgcolor: getAvatarColor(row.user?.name || row.name || row.userInfo || ""),
                   fontSize: "18px",
                   fontWeight: "bold",
                 }}
               >
-                {getInitials(row.user?.name || row.name || "")}
+                {getInitials(row.user?.name || row.name || row.userInfo || "")}
               </Avatar>
               <Box sx={{ textAlign: "left" }}>
                 <Typography
@@ -146,7 +146,7 @@ export default function PaginatedTable({
                     mb: 0.5,
                   }}
                 >
-                  {row.user?.fullName || row.fullName || "無資料"}
+                  {row.user?.fullName || row.fullName || row.userInfo || "無資料"}
                 </Typography>
                 <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                   <Mail size={14} color="#666" />
