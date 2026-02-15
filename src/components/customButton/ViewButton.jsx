@@ -3,7 +3,7 @@ import { Eye } from "lucide-react";
 import { IconButton } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/tooltip";
 
-const ViewButton = (onView, row) => {
+const ViewButton = ({ onView, row }) => {
     return (
         <Tooltip content="檢視">
             <IconButton
@@ -12,7 +12,6 @@ const ViewButton = (onView, row) => {
                 colorPalette="blue"
                 variant="surface"
                 onClick={() => onView(row)}
-
             >
                 <Eye size={18}/>
             </IconButton>
