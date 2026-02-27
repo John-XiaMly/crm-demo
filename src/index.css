@@ -1,0 +1,30 @@
+.fixed-bottom {
+    text-align: center;
+    background-color: #ECF0F5;
+    padding: 5px;
+    position: fixed;
+    bottom: 30px;
+    left: 1%;
+    right: 1%;
+    z-index: 2;
+}
+
+@media (any-hover: hover) {
+    .fixed-bottom {
+        text-align: center;
+        background-color: #ECF0F5;
+        padding: 5px;
+        position: fixed;
+        bottom: 40px;
+        left: 1%;
+        right: 1%;
+        z-index: 20;
+        opacity: .3;
+        transition: opacity 0.3s;
+    }
+
+    .fixed-bottom:hover {
+        opacity: 1;
+        transition: opacity 0.3s;
+    }
+}

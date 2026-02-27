@@ -6,17 +6,14 @@ export const getCustomers = () => api(ENDPOINTS.getCustomers, {}, "get");
 export const getCustomerById = (id) =>
   api(`${ENDPOINTS.getCustomers}/${id}`, null, "get");
 
-// export const adminUpdateCustomer = (id, payload) =>
-//   api(`${ENDPOINTS.adminUpdateCustomer}/${id}`, payload, "put");
-//
-// export const adminChangeCustomerPassword = (id, payload) =>
-//   api(`${ENDPOINTS.adminChangeCustomerPassword}/${id}`, payload, "put");
-//
-// export const adminResetCustomerPassword = (id, payload) =>
-//   api(`${ENDPOINTS.adminResetCustomerPassword}/${id}`, payload, "put");
-//
-// export const getAllCaseRequests = (params) => {
-//   const url = ENDPOINTS.requestCase;
+export const adminUpdateCustomer = (id, payload) =>
+  api(`${ENDPOINTS.adminUpdateCustomer}/${id}`, payload, "put");
+
+export const adminCreateCustomer = (payload) =>
+    api(`${ENDPOINTS.adminCreateCustomer}`, payload, "post");
+
+export const adminDeleteCustomer = (id) =>
+    api(`${ENDPOINTS.getCustomers}/${id}`, null, "DELETE");
 
   const queryParams = new URLSearchParams();
 

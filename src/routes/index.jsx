@@ -26,6 +26,7 @@ import TermsPage from "../app/terms";
 import PrivacyPage from "../app/privacy";
 import AccountNumberPage from "../app/accountNumber";
 import CustomersManagement from "../app/customers/index.jsx";
+import ViewCustomer from "@/app/customers/ViewCustomer.jsx";
 const AUTH_ROUTES = [
   {
     id: 1,
@@ -73,9 +74,15 @@ const ADMIN_ROUTES = [
     name: "客戶管理",
     component: <CustomersManagement />,
     exact: "exact",
-    path: "/users",
+    path: "/customers",
     activeIcon: <Users size={20} color="#ffffff" />,
     inActiveIcon: <Users size={20} color="#64748b" />,
+  },
+  {
+    id: 21,
+    component: <ViewCustomer />,
+    path: "/customers/:id",
+    isHideMenu: true
   },
   {
     id: 3,

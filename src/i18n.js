@@ -21,9 +21,14 @@ const resources = {
                 create: "新增",
                 edit: "編輯",
                 view: "查看",
-                delete: "刪除"
+                delete: "刪除",
+                confirm: "確認",
+                cancel: "取消",
+                return: "返回",
+                systemInfo: "系統資訊"
             },
             customer: {
+                title: "客戶管理",
                 listTitle: "客戶列表",
                 dataTitle: "客戶資料",
                 name: "客戶名稱",
@@ -33,6 +38,18 @@ const resources = {
                 contactPerson: "聯絡人",
                 email: "email",
                 address: "地址",
+            },
+            message: {
+                customer: "客戶"
+            },
+            script: {
+                "deleteConfirm": "確定刪除此{{entity}} ?"
+            },
+            data: {
+                createdBy: "建立者",
+                createdAt: "建立時間",
+                modifiedBy: "修改者",
+                modifiedAt: "修改時間",
             }
         }
     }

@@ -81,7 +81,7 @@ export const CustomersManagement = () => {
 
     // Action handlers
     const handleView = (customer) => {
-        navigate(`/customer-history/${customer._id}`);
+        navigate(`/customers/${customer.id}`);
     };
 
     const handleEdit = (customer) => {
@@ -268,7 +268,6 @@ export const CustomersManagement = () => {
                 </Card.Root>
             </Box>
 
-            {/*</ListCard>*/}
             <Box p={2}>
                 <Card.Root>
                     <Card.Header>
