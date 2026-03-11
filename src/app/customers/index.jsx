@@ -6,7 +6,8 @@ import { useState, useEffect} from "react";
 import { getCustomers } from "@/api/Modules/customer.js";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
-import { Plus, Filter, Trash2, Users } from "lucide-react"
+import { Plus, Filter, Trash2, Users, X } from "lucide-react"
+import {useTranslation} from "react-i18next";
 
 export const CustomersManagement = () => {
     // State for edit dialog
@@ -28,7 +29,7 @@ export const CustomersManagement = () => {
         {id: "owner", title: "業務窗口", align: "left"},
         {id: "phone", title: "客戶電話", align: "left"},
         {id: "contactPerson", title: "聯絡人", align: "left"},
-        {id: "address", title: "地址", align: "left"},
+        {id: "email", title: "email", align: "left"},
         {id: "actions", title: "操作", align: "left"}
     ];
 
@@ -40,7 +41,7 @@ export const CustomersManagement = () => {
         "owner",
         "phone",
         "contactPerson",
-        "address",
+        "email",
         "actions"
     ];
 
@@ -104,46 +105,36 @@ export const CustomersManagement = () => {
         console.log(`Customer ${customerId} status changed to: ${newStatus}`);
     };
 
-    const [name, setName] = useState("");
-    const [taxId, setTaxId] = useState("");
-    const [owner, setOwner] = useState("");
-    const [phone, setPhone] = useState("");
-    const [contactPerson, setContactPerson] = useState("");
-    const [address, setAddress] = useState("");
+    const [formData, setFormData] = useState({
+        name: "",
+        taxId: "",
+        owner: "",
+        phone: "",
+        contactPerson: "",
+        email: ""
+    });
 
     const handleChange = (e, field) => {
         const value = e.target.value;
-        console.log(field);
-        switch (field) {
-            case "name":
-                setName(value);
-                break;
-            case "taxId":
-                setTaxId(value);
-                break;
-            case "owner":
-                setOwner(value);
-                break;
-            case "phone":
-                setPhone(value);
-                break;
-            case "contactPerson":
-                setContactPerson(value);
-                break;
-            case "address":
-                setAddress(value);
-                break;
-        }
+        setFormData({
+            ...formData,
+            [field]: value
+        });
     }
 
     const handleClear = () => {
-        setName("");
-        setTaxId("");
-        setOwner("");
-        setPhone("");
-        setContactPerson("");
-        setAddress("");
+        setFormData({
+            name: "",
+            taxId: "",
+            owner: "",
+            phone: "",
+            contactPerson: "",
+            email: ""
+        });
     }
+
+    const { t: t } = useTranslation();
+    const { t: tCustomer } = useTranslation("translation", { keyPrefix: "customer" });
 
     return (
         <Box>
@@ -164,64 +155,112 @@ export const CustomersManagement = () => {
                             <HStack wrap="wrap">
                                 <Heading size="md" display="flex" alignItems="center" gap="2" color="blue">
                                     <Filter></Filter>
-                                    <Text>條件式搜索</Text>
+                                    <Text>{t("label.searchCondition", "條件式搜索")}</Text>
                                 </Heading>
                             </HStack>
                             <HStack wrap="wrap">
                                 <Button size="sm" colorPalette="red" variant="surface" onClick={handleClear}>
-                                    <Trash2></Trash2>
-                                    清除
+                                    <X></X>
+                                    <Text>{t("button.clear", "清除")}</Text>
                                 </Button>
                             </HStack>
                         </Flex>
                     </Card.Header>
                     <Card.Body>
 
-                        <Box p="4"> {/* 給內部一點內縮空間 */}
+                        <Box p="4">
                             <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 4, lg: 10 }}>
                                 <Stack direction={{ base: "column", md: "row" }} align={{ md: "center" }} gap={2}>
                                     <Text fontWeight="semibold" minW={{ md: "100px" }} whiteSpace="nowrap">
-                                        客戶名稱
+                                        {tCustomer("name", "客戶名稱")}
                                     </Text>
-                                    <Input placeholder="請輸入客戶名稱" flex="1" variant="outline" value={name} onChange={(e) => handleChange(e, "name")} />
+                                    <Input
+                                        placeholder={t("input.placeholder", {
+                                            field: tCustomer("name", "客戶名稱"),
+                                            defaultValue: "請輸入客戶名稱"
+                                        })}
+                                        flex="1"
+                                        variant="outline"
+                                        value={formData.name}
+                                        onChange={(e) => handleChange(e, "name")} />
                                 </Stack>
                                 <Stack direction={{ base: "column", md: "row" }} align={{ md: "center" }} gap={2}>
                                     <Text fontWeight="semibold" minW={{ md: "100px" }} whiteSpace="nowrap">
-                                        客戶統編
+                                        {tCustomer("taxId", "客戶統編")}
                                     </Text>
-                                    <Input placeholder="請輸入客戶統編" flex="1" variant="outline" value={taxId}  onChange={(e) => handleChange(e, "taxId")} />
+                                    <Input
+                                        placeholder={t("input.placeholder", {
+                                            field: tCustomer("taxId", "客戶統編"),
+                                            defaultValue: "請輸入客戶統編"
+                                        })}
+                                        flex="1"
+                                        variant="outline"
+                                        value={formData.taxId}
+                                        onChange={(e) => handleChange(e, "taxId")} />
                                 </Stack>
                             </SimpleGrid>
                         </Box>
-                        <Box p="4"> {/* 給內部一點內縮空間 */}
+                        <Box p="4">
                             <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 4, lg: 10 }}>
                                 <Stack direction={{ base: "column", md: "row" }} align={{ md: "center" }} gap={2}>
                                     <Text fontWeight="semibold" minW={{ md: "100px" }} whiteSpace="nowrap">
-                                        業務窗口
+                                        {tCustomer("owner", "業務窗口")}
                                     </Text>
-                                    <Input placeholder="請輸入業務窗口" flex="1" variant="outline" value={owner}  onChange={(e) => handleChange(e, "owner")} />
+                                    <Input
+                                        placeholder={t("input.placeholder", {
+                                            field: tCustomer("owner", "業務窗口"),
+                                            defaultValue: "請輸入業務窗口"
+                                        })}
+                                        flex="1"
+                                        variant="outline"
+                                        value={formData.owner}
+                                        onChange={(e) => handleChange(e, "owner")} />
                                 </Stack>
                                 <Stack direction={{ base: "column", md: "row" }} align={{ md: "center" }} gap={2}>
                                     <Text fontWeight="semibold" minW={{ md: "100px" }} whiteSpace="nowrap">
-                                        客戶電話
+                                        {tCustomer("phone", "客戶電話")}
                                     </Text>
-                                    <Input placeholder="請輸入客戶電話" flex="1" variant="outline" value={phone}  onChange={(e) => handleChange(e, "phone")} />
+                                    <Input
+                                        placeholder={t("input.placeholder", {
+                                            field: tCustomer("phone", "客戶電話"),
+                                            defaultValue: "請輸入客戶電話"
+                                        })}
+                                        flex="1"
+                                        variant="outline"
+                                        value={formData.phone}
+                                        onChange={(e) => handleChange(e, "phone")} />
                                 </Stack>
                             </SimpleGrid>
                         </Box>
-                        <Box p="4"> {/* 給內部一點內縮空間 */}
+                        <Box p="4">
                             <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 4, lg: 10 }}>
                                 <Stack direction={{ base: "column", md: "row" }} align={{ md: "center" }} gap={2}>
                                     <Text fontWeight="semibold" minW={{ md: "100px" }} whiteSpace="nowrap">
-                                        聯絡人
+                                        { tCustomer("contactPerson", "聯絡人") }
                                     </Text>
-                                    <Input placeholder="請輸入聯絡人" flex="1" variant="outline" value={contactPerson}  onChange={(e) => handleChange(e, "contactPerson")} />
+                                    <Input
+                                        placeholder={t("input.placeholder", {
+                                            field: tCustomer("contactPerson", "聯絡人"),
+                                            defaultValue: "請輸入聯絡人"
+                                        })}
+                                        flex="1"
+                                        variant="outline"
+                                        value={formData.contactPerson}
+                                        onChange={(e) => handleChange(e, "contactPerson")} />
                                 </Stack>
                                 <Stack direction={{ base: "column", md: "row" }} align={{ md: "center" }} gap={2}>
                                     <Text fontWeight="semibold" minW={{ md: "100px" }} whiteSpace="nowrap">
-                                        地址
+                                        { tCustomer("email", "email") }
                                     </Text>
-                                    <Input placeholder="請輸入地址" flex="1" variant="outline" value={address}  onChange={(e) => handleChange(e, "address")} />
+                                    <Input
+                                        placeholder={t("input.placeholder", {
+                                            field: tCustomer("email", "email"),
+                                            defaultValue: "請輸入email"
+                                        })}
+                                        flex="1"
+                                        variant="outline"
+                                        value={formData.email}
+                                        onChange={(e) => handleChange(e, "email")} />
                                 </Stack>
                             </SimpleGrid>
                         </Box>
@@ -236,12 +275,12 @@ export const CustomersManagement = () => {
                         <Flex justify="space-between" align="center" wrap="wrap" gap="4">
                             <Heading size="md" display="flex" alignItems="center" gap="2" color="blue">
                                 <Users></Users>
-                                <Text>客戶列表</Text>
+                                <Text>{t("customer.listTitle", "客戶列表")}</Text>
                             </Heading>
                             <HStack wrap="wrap">
-                                <Button size="sm" colorPalette="green" variant="surface">
+                                <Button size="sm" colorPalette="green" variant="surface" onClick={() => handleEdit()}>
                                     <Plus></Plus>
-                                    新增
+                                    <Text>{t("button.create", "新增")}</Text>
                                 </Button>
                             </HStack>
                         </Flex>
