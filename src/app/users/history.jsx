@@ -82,10 +82,10 @@ const Userhistory = () => {
     }
   };
 
-  const fetchAllLoanRequest = async () => {
+  const fetchAllCaseRequests = async () => {
     try {
       setIsLoading((prev) => ({ ...prev, fetchLoan: true }));
-      const response = await getAllLoanRequests({ userId: UserId });
+      const response = await getAllCaseRequests({ userId: UserId });
       if ([200, 201].includes(response?.status)) {
         setLoanData(response.data.data.loanRequests);
       } else {
@@ -104,7 +104,7 @@ const Userhistory = () => {
 
   useEffect(() => {
     if (UserId) {
-      fetchAllLoanRequest();
+      fetchAllCaseRequests();
       fetchUsersByUserId();
     }
   }, [UserId]);
@@ -112,9 +112,9 @@ const Userhistory = () => {
   const handleLoanStatusChange = async (row, status, index) => {
     try {
       setIsLoading((prev) => ({ ...prev, updateLoanStatus: true }));
-      const response = await updateLoanStatus(row._id, { status });
+      const response = await updateCaseStatus(row._id, { status });
       if ([200, 201].includes(response?.status)) {
-        fetchAllLoanRequest();
+        fetchAllCaseRequests();
         enqueueSnackbar(response?.data?.message || "更新成功", {
           variant: "success",
         });
